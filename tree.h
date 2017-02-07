@@ -15,7 +15,7 @@ typedef struct data
     char firstName[SIZE];
     char lastName[SIZE];
     unsigned int counter;
-    unsigned long *telnumber ;
+    long telnumber[] ;
 }data;
 
 typedef struct node

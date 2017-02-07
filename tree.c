@@ -17,7 +17,7 @@ void show(node *root)
     printf("\nLast Name : %s", root->person.lastName);
     printf("\nTelephon Numbers :  ");
     for(i = 0; i < root->person.counter; i++)
-        printf("%ld  ", root->person.telnumber[i]);
+        printf("%lud  ", root->person.telnumber[i]);
 }
 
 void insertNode(node **root, node *newElement)
@@ -57,7 +57,7 @@ void insertNode(node **root, node *newElement)
 void loadData(node **root)
 {
     node *temp;
-    int i;
+    unsigned int i;
 
     temp = malloc(sizeof(node));
     if(temp == NULL)
@@ -77,6 +77,7 @@ void loadData(node **root)
     printf("Write telephone numbers : ");
     for(i = 0; i < temp->person.counter; i++)
         scanf("%ld", &temp->person.telnumber[i]);
+
 
     insertNode(root, temp);
 
