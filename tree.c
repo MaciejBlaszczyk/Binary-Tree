@@ -1,59 +1,41 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
-#include<windows.h>
-#include<conio.h>
+#include "tree.h"
+
 #define SIZE 20
 #define SIZET 5
 
-typedef struct data
+void word()
 {
-    char firstname [SIZE];
-    char lastname [SIZE];
-    unsigned int counter;
-    unsigned long telnumber [SIZET];
-}data;
-
-typedef struct node
-{
-    struct node *right;
-    struct node *left;
-    data person;
-}node;
-
-void word (void)
-{
-    printf ("\nPress any key to continue ...");
-    getch ();
-    system ("cls");
+    printf("\nPress any key to continue ...");
+    getch();
+    system("cls");
 }
 
-void show (node * root)
+void show(node *root)
 {
     int i;
-    printf ("\nFirst Name : %s", root->person.firstname);
-    printf ("\nLast Name : %s", root->person.lastname);
-    printf ("\nTelephon Numbers :  ");
-    for (i = 0; i < root->person.counter; i++)
-        printf ("%ld  ", root->person.telnumber[i]);
+    printf("\nFirst Name : %s", root->person.firstName);
+    printf("\nLast Name : %s", root->person.lastName);
+    printf("\nTelephon Numbers :  ");
+    for(i = 0; i < root->person.counter; i++)
+        printf("%ld  ", root->person.telnumber[i]);
 }
 
-void insert_node (node **root, node *new_element)
+void insertNode(node **root, node *newElement)
 {
-    new_element->right = NULL;
-    new_element->left = NULL;
+    newElement->right = NULL;
+    newElement->left = NULL;
     node *temp;
     temp = *root;
-    if (temp == NULL)
-        *root = new_element;
+    if(temp == NULL)
+        *root = newElement;
     else
-        while (temp)
+        while(temp)
         {
-            if (strcmp (temp->person.lastname, new_element->person.lastname) == -1)
+            if(strcmp(temp->person.lastName, newElement->person.lastName) == -1)
             {
-                if (temp->right == NULL)
+                if(temp->right == NULL)
                 {
-                    temp->right = new_element;
+                    temp->right = newElement;
                     break;
                 }
                     else
@@ -61,9 +43,9 @@ void insert_node (node **root, node *new_element)
             }
             else
             {
-                if (temp->left == NULL)
+                if(temp->left == NULL)
                 {
-                    temp->left = new_element;
+                    temp->left = newElement;
                     break;
                 }
                     else
@@ -72,97 +54,97 @@ void insert_node (node **root, node *new_element)
         }
 }
 
-void load_data (node **root)
+void loadData(node **root)
 {
     node *temp;
     int i;
 
-    temp = malloc (sizeof (node));
-    if (temp == NULL)
+    temp = malloc(sizeof(node));
+    if(temp == NULL)
     {
-        printf ("Memory error");
-        free (temp);
+        printf("Memory error");
+        free(temp);
         temp = NULL;
         return;
     }
 
-    printf ("\nWrite first name : ");
-    scanf ("%s", temp->person.firstname);
-    printf ("Write last name : ");
-    scanf ("%s", temp->person.lastname);
-    printf ("How much telephon numbers does person have? ");
-    scanf ("%d", &temp->person.counter);
-    printf ("Write telephone numbers : ");
-    for (i = 0; i < temp->person.counter; i++)
-        scanf ("%ld", &temp->person.telnumber[i]);
+    printf("\nWrite first name : ");
+    scanf("%s", temp->person.firstName);
+    printf("Write last name : ");
+    scanf("%s", temp->person.lastName);
+    printf("How much telephon numbers does person have? ");
+    scanf("%d", &temp->person.counter);
+    printf("Write telephone numbers : ");
+    for(i = 0; i < temp->person.counter; i++)
+        scanf("%ld", &temp->person.telnumber[i]);
 
-    insert_node (root, temp);
+    insertNode(root, temp);
 
-    printf ("\nNode has been added.");
+    printf("\nNode has been added.");
     word();
 }
 
-void in_order_show (node *root)
+void inOrderShow(node *root)
 {
-    if (root != NULL)
+    if(root != NULL)
     {
-        in_order_show (root->left);
-        show (root);
-        in_order_show (root->right);
+        inOrderShow(root->left);
+        show(root);
+        inOrderShow(root->right);
     }
 }
 
-void del_tree (node *root)
+void deleteTree(node *root)
 {
-    if (root != NULL)
+    if(root != NULL)
     {
-        del_tree (root->left);
-        del_tree (root->right);
-        free (root);
+        deleteTree(root->left);
+        deleteTree(root->right);
+        free(root);
         root = NULL;
     }
 }
 
-node * search_min (node * root)
+node *searchMin(node *root)
 {
-    if (root->left != NULL)
-        return search_min (root->left);
+    if(root->left != NULL)
+        return searchMin(root->left);
     return root;
 }
 
-node * search_max (node * root)
+node *searchMax(node *root)
 {
-    if (root->right != NULL)
-        return search_max (root->right);
+    if(root->right != NULL)
+        return searchMax(root->right);
     return root;
 }
 
-void count_nodes (node * root, unsigned int *counter)
+void countNodes(node *root, unsigned int *counter)
 {
-    if (root != NULL)
+    if(root != NULL)
     {
-        count_nodes (root->left, counter);
-        (*counter)++;
-        count_nodes (root->right, counter);
+        countNodes(root->left, counter);
+       (*counter)++;
+        countNodes(root->right, counter);
     }
 }
 
-void search_person (node * root)
+void searchPerson(node *root)
 {
     char key [SIZE];
-    printf ("Write surname :");
-    scanf ("%s", key);
+    printf("Write surname :");
+    scanf("%s", key);
     while(root)
     {
-        if (strcmp (root->person.lastname, key) == 0)
+        if(strcmp(root->person.lastName, key) == 0)
             break;
-        else if (strcmp (root->person.lastname, key) == -1)
+        else if(strcmp(root->person.lastName, key) == -1)
             root = root->right;
         else
             root = root->left;
     }
-    if (root)
-        show (root);
+    if(root)
+        show(root);
     else
         printf("Person does not exist");
 }

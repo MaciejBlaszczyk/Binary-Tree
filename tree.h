@@ -1,12 +1,19 @@
-#ifndef gra
-#define gra
+#ifndef BINARYTREE
+#define BINARYTREE
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include<windows.h>
+#include<conio.h>
+
 #define SIZE 20
 #define SIZET 5
 
 typedef struct data
 {
-    char firstname [SIZE];
-    char lastname [SIZE];
+    char firstName[SIZE];
+    char lastName[SIZE];
     unsigned int counter;
     unsigned long *telnumber ;
 }data;
@@ -18,25 +25,16 @@ typedef struct node
     data person;
 }node;
 
-void show (node *);
+void show(node *);
+void word(void);
+void insertNode(node **, node *);
+void loadData(node **);
+void inOrderShow(node *);
+void deleteTree(node *);
+node * searchMin(node *);
+node * searchMax(node *);
+void countNodes(node *, unsigned int *);
+void searchPerson(node *);
 
-void word (void);
-
-void insert_node (node **, node *);
-
-void load_data (node **);
-
-void in_order_show(node *);
-
-void del_tree(node *);
-
-node * search_min (node *);
-
-node * search_max (node *);
-
-void count_nodes (node *, unsigned int *);
-
-void search_person (node *);
-
-#endif // tree
+#endif // BINARYTREE
 

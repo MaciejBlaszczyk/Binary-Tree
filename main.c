@@ -1,4 +1,3 @@
-#include<stdio.h>
 #include"tree.h"
 
 int main()
@@ -19,22 +18,22 @@ int main()
         scanf ("%d", &number);
         switch (number)
         {
-            case 1 :load_data (&root);
+            case 1 :loadData (&root);
             break;
-            case 2 :in_order_show (root); word ();
+            case 2 :inOrderShow (root); word ();
             break;
-            case 3 :show (search_min (root)); word ();
+            case 3 :show (searchMin (root)); word ();
             break;
-            case 4 :show (search_max (root)); word ();
+            case 4 :show (searchMax (root)); word ();
             break;
-            case 5 :counter = 0; count_nodes (root, &counter); printf("%d", counter); word ();
+            case 5 :counter = 0; countNodes (root, &counter); printf("%d", counter); word ();
             break;
-            case 6 :search_person (root); word ();
+            case 6 :searchPerson (root); word ();
             break;
             case 9 :goto Jump;
         }
     }
     Jump:
-    del_tree (root);
+    deleteTree (root);
     return 0;
 }
